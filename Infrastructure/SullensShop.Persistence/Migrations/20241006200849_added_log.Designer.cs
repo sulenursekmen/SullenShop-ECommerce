@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SullensShop.Persistence.Context;
@@ -11,9 +12,11 @@ using SullensShop.Persistence.Context;
 namespace SullensShop.Persistence.Migrations
 {
     [DbContext(typeof(SullensShopContext))]
-    partial class SullensShopContextModelSnapshot : ModelSnapshot
+    [Migration("20241006200849_added_log")]
+    partial class added_log
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,10 +34,6 @@ namespace SullensShop.Persistence.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -57,10 +56,6 @@ namespace SullensShop.Persistence.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("CategoryDetailId");
 
@@ -106,20 +101,9 @@ namespace SullensShop.Persistence.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ProductDescription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProductImageUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal>("ProductPrice")
-                        .HasColumnType("numeric");
 
                     b.HasKey("ProductId");
 
@@ -128,64 +112,6 @@ namespace SullensShop.Persistence.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("SullensShop.Domain.Entities.ProductDetail", b =>
-                {
-                    b.Property<string>("ProductDetailId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProductDescription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ProductId1")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ProductInfo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ProductDetailId");
-
-                    b.HasIndex("ProductId1");
-
-                    b.ToTable("ProductDetails");
-                });
-
-            modelBuilder.Entity("SullensShop.Domain.Entities.ProductImage", b =>
-                {
-                    b.Property<string>("ProductImageId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Image1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Image2")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Image3")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ProductId1")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ProductImageId");
-
-                    b.HasIndex("ProductId1");
-
-                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("SullensShop.Domain.Entities.CategoryDetail", b =>
@@ -216,28 +142,6 @@ namespace SullensShop.Persistence.Migrations
                     b.Navigation("CategoryDetail");
                 });
 
-            modelBuilder.Entity("SullensShop.Domain.Entities.ProductDetail", b =>
-                {
-                    b.HasOne("SullensShop.Domain.Entities.Product", "Product")
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("ProductId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("SullensShop.Domain.Entities.ProductImage", b =>
-                {
-                    b.HasOne("SullensShop.Domain.Entities.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("SullensShop.Domain.Entities.Category", b =>
                 {
                     b.Navigation("CategoryDetails");
@@ -246,13 +150,6 @@ namespace SullensShop.Persistence.Migrations
             modelBuilder.Entity("SullensShop.Domain.Entities.CategoryDetail", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("SullensShop.Domain.Entities.Product", b =>
-                {
-                    b.Navigation("ProductDetails");
-
-                    b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618
         }

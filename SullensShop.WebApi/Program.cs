@@ -6,6 +6,7 @@ using SullensShop.Application.Features.CQRS.Handlers.ProductHandlers;
 using SullensShop.Application.Interfaces;
 using SullensShop.Persistence.Context;
 using SullensShop.Persistence.Repositories;
+using SullensShop.WebApi.Services.LoggerService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,9 @@ builder.Services.AddScoped<GetCategoryDetailByIdQueryHandler>();
 builder.Services.AddScoped<GetCategoryDetailQueryHandler>();
 builder.Services.AddScoped<RemoveCategoryDetailCommandHandler>();
 builder.Services.AddScoped<UpdateCategoryDetailCommandHandler>();
+
+builder.Services.AddScoped(typeof(ILoggerService<>), typeof(LoggerService<>));
+
 
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

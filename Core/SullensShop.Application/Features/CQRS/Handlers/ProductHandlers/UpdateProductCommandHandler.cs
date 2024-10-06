@@ -22,6 +22,9 @@ namespace SullensShop.Application.Features.CQRS.Handlers.ProductHandlers
         {
             var value = await _repository.GetByIdAsync(updateProductCommand.ProductId);
             value.ProductName = updateProductCommand.ProductName;
+            value.ProductDescription = updateProductCommand.ProductDescription;
+            value.ProductPrice = updateProductCommand.ProductPrice;
+            value.ProductImageUrl = updateProductCommand.ProductImageUrl;
             value.CategoryId = updateProductCommand.CategoryId;
             value.CategoryDetailId = updateProductCommand.CategoryDetailId;
             await _repository.UpdateAsync(value);

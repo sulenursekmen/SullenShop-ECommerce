@@ -25,6 +25,7 @@ namespace SullensShop.Application.Features.CQRS.Handlers.CategoryHandlers
             {
                 CategoryId = x.CategoryId,
                 CategoryName = x.CategoryName,
+                ImageUrl=x.ImageUrl,
 
             }).ToList();
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SullensShop.Persistence.Context;
@@ -11,9 +12,11 @@ using SullensShop.Persistence.Context;
 namespace SullensShop.Persistence.Migrations
 {
     [DbContext(typeof(SullensShopContext))]
-    partial class SullensShopContextModelSnapshot : ModelSnapshot
+    [Migration("20241006213827_editted_product_category_categorydetail_added_productdetail_and_productimage")]
+    partial class editted_product_category_categorydetail_added_productdetail_and_productimage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

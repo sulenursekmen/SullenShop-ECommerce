@@ -25,6 +25,9 @@ namespace SullensShop.Application.Features.CQRS.Handlers.ProductHandlers
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
+                ProductDescription = x.ProductDescription,
+                ProductPrice = x.ProductPrice,
+                ProductImageUrl = x.ProductImageUrl,
                 CategoryDetailId = x.CategoryDetailId,
                 CategoryId = x.CategoryId
                 

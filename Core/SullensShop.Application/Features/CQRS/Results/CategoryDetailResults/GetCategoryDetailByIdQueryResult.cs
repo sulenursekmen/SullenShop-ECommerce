@@ -11,5 +11,6 @@ namespace SullensShop.Application.Features.CQRS.Results.CategoryDetailResults
         public int CategoryDetailId { get; set; }
         public int CategoryId { get; set; }
         public string CategoryDetailName { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using SullensShop.Application.Features.CQRS.Commands.CategoryCommands;
 using SullensShop.Application.Features.CQRS.Handlers.CategoryHandlers;
 using SullensShop.Application.Features.CQRS.Queries.CategoryQueries;
 using SullensShop.Domain.Entities;
+using SullensShop.WebApi.Services.LoggerService;
 
 namespace SullensShop.WebApi.Controllers
 {
@@ -11,14 +12,14 @@ namespace SullensShop.WebApi.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ILogger<CategoriesController> _logger;
+        private readonly ILoggerService<CategoriesController> _logger;
         private readonly GetCategoryQueryHandler _getCategoryQueryHandler;
         private readonly GetCategoryByIdQueryHandler _getCategoryByIdQueryHandler;
         private readonly CreateCategoryCommandHandler _createCategoryCommandHandler;
         private readonly UpdateCategoryCommandHandler _updateCategoryCommandHandler;
         private readonly RemoveCategoryCommandHandler _removeCategoryCommandHandler;
 
-        public CategoriesController(GetCategoryQueryHandler getCategoryQueryHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler, RemoveCategoryCommandHandler removeCategoryCommandHandler, ILogger<CategoriesController> logger)
+        public CategoriesController(GetCategoryQueryHandler getCategoryQueryHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler, RemoveCategoryCommandHandler removeCategoryCommandHandler, ILoggerService<CategoriesController> logger)
         {
             _getCategoryQueryHandler = getCategoryQueryHandler;
             _getCategoryByIdQueryHandler = getCategoryByIdQueryHandler;
@@ -45,14 +46,15 @@ namespace SullensShop.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryCommand command)
         {
-            _logger.LogInformation("Veritabanına ürün ekleniyor: {@CreateCategoryCommand}", command.CategoryName);
+
+            await _logger.LogInfo("Kategoriler alınıyor." + command.CategoryName);
             try
             {
                 await _createCategoryCommandHandler.Handle(command);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Veritabanına kategori ekleme sırasında hata oluştu.");
+                await _logger.LogError("Bir hata oluştu", ex);
                 throw;
             }
 
@@ -62,7 +64,16 @@ namespace SullensShop.WebApi.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryCommand command)
         {
-            await _updateCategoryCommandHandler.Handle(command);
+            try
+            {
+                await _updateCategoryCommandHandler.Handle(command);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogError("Bir hata oluştu", ex);
+                throw;
+            }
+
             return Ok("The Category has been updated successfully");
         }
 

@@ -19,6 +19,7 @@ namespace SullensShop.Application.Features.CQRS.Handlers.CategoryDetailHandlers
             value.CategoryDetailId = updateCategoryDetailCommand.CategoryDetailId;
             value.CategoryDetailName = updateCategoryDetailCommand.CategoryDetailName;
             value.CategoryId = updateCategoryDetailCommand.CategoryId;
+            value.ImageUrl = updateCategoryDetailCommand.ImageUrl;
             await _repository.UpdateAsync(value);
         }
     }

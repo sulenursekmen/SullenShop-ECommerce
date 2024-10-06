@@ -20,8 +20,8 @@ namespace SullensShop.Application.Features.CQRS.Handlers.CategoryDetailHandlers
             {
                 CategoryDetailId = x.CategoryDetailId,
                 CategoryDetailName = x.CategoryDetailName,
-                CategoryId=x.CategoryId,
-               
+                CategoryId = x.CategoryId,
+                ImageUrl = x.ImageUrl,
 
             }).ToList();
         }

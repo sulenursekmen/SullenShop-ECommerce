@@ -40,7 +40,12 @@ namespace SullensShop.Application.Features.CQRS.Handlers.ProductHandlers
                             CategoryName = b.CategoryName,
                             ProductName = a.ProductName,
                             CategoryDetailName = c.CategoryDetailName,
-                        
+                            ProductImageUrl = a.ProductImageUrl,
+                            ProductDescription=a.ProductDescription,
+                            ProductPrice=a.ProductPrice,
+                            Category=b,
+                            CategoryDetail=c,
+                            
                         };
             return query.ToList();
         }

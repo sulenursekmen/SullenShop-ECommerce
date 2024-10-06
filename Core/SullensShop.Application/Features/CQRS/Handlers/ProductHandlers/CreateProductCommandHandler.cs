@@ -23,6 +23,9 @@ namespace SullensShop.Application.Features.CQRS.Handlers.ProductHandlers
             await _repository.CreateAsync(new Product
             {
                 ProductName = createProductCommand.ProductName,
+                ProductPrice = createProductCommand.ProductPrice,
+                ProductImageUrl = createProductCommand.ProductImageUrl,
+                ProductDescription = createProductCommand.ProductDescription,
                 CategoryDetailId = createProductCommand.CategoryDetailId,
                 CategoryId = createProductCommand.CategoryId,
             });

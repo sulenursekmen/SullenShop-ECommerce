@@ -19,6 +19,7 @@ namespace SullensShop.Application.Features.CQRS.Handlers.CategoryDetailHandlers
             {
                 CategoryDetailName = createCategoryDetailCommand.CategoryDetailName,
                 CategoryId = createCategoryDetailCommand.CategoryId,
+                ImageUrl = createCategoryDetailCommand.ImageUrl,
             });
         }
     }
